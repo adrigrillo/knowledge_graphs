@@ -13,10 +13,23 @@
 @prefix wd: <http://worldbank.org/> .
 @base <http://geonames.org/> .
 
+<ContinentCodesTriples>
+    # Define the data source
+    rml:logicalSource [
+        rml:source "/home/alescop/Documents/University/BMKG/knowledge_graphs/data/continent-codes.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+
+    # Define the subject of the generated statements
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/page/{Name}";
+#       rr:class db:Continent
+    ].
+
 <GeoNamesTriples>
     # Define the data source (file location)
     rml:logicalSource [
-        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/countryInfo.csv";
+        rml:source "/home/alescop/Documents/University/BMKG/knowledge_graphs/data/countryInfo.csv";
         rml:referenceFormulation ql:CSV
     ];
 
@@ -36,18 +49,24 @@
     
     # Define the object of the population property as an integer
     rr:predicateObjectMap [ 
-        rr:predicate db:Population ;
+        rr:predicate db:Population;
         rr:objectMap [ 
             rml:reference "Population"; 
             rr:datatype xsd:integer 
         ]
+    ];
+
+    # Generate a URI for the continent object
+    rr:predicateObjectMap [ 
+        rr:predicate db:Continent;
+        rr:objectMap [
+            rr:parentTriplesMap <ContinentCodesTriples>;
+            rr:joinCondition [
+                rr:child "Continent";
+                rr:parent "Code";
+            ];
+        ];
     ].
-#
-#    # Generate a URI for the continent object
-#    rr:predicateObjectMap [ 
-#        rr:predicate gn:continent;
-#        rr:objectMap [ 
-#            rr:template "http://geonames.org/continent/{Continent}" 
-#        ]
-#    ].
         
+<GDPTriples>
+    
