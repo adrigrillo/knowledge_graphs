@@ -36,6 +36,9 @@ Contains the GDP from 1960 to 2017 for 276 countries. A sample of the data is:
 </record>
 ```
 
+The API for the World Bank data is described [here](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information).
+We are interested in the GDP, so we have to use [this one](https://datahelpdesk.worldbank.org/knowledgebase/articles/898614-aggregate-api-queries) and [this other one](https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries).
+
 ### Queries
 The queries are:
 1. List all countries with population less than 50.000 and order them from the smallest to the largest in terms of landmass area (square kilometres).

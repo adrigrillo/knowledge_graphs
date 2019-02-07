@@ -16,20 +16,42 @@
 <ContinentCodesTriples>
     # Define the data source
     rml:logicalSource [
-        rml:source "/home/alescop/Documents/University/BMKG/knowledge_graphs/data/continent-codes.csv";
+        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/continent-codes.csv";
         rml:referenceFormulation ql:CSV
     ];
 
     # Define the subject of the generated statements
     rr:subjectMap [
-        rr:template "http://dbpedia.org/page/{Name}";
-#       rr:class db:Continent
+        rr:template "http://dbpedia.org/page/{Page}";
+        rr:class db:Continent
+    ];
+
+    # Map the country name to rdfs:label
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label;
+        rr:objectMap [ 
+            rml:reference "Name"
+        ]
+    ].
+
+<GDPTriples>
+
+    rml:logicalSource [
+        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/gdp_worldbank_small.xml";
+        rml:referenceFormulation ql:XPath ;
+        rml:iterator "/Root/data/record"
+    ];
+
+    # Generate a URI for each GDP yearly entry for each country
+    rr:subjectMap [ 
+        rr:template "http://api.worldbank.org/v2/country/{country/@key}/indicator/NY.GDP.MKTP.CD?format=json&date={year}";
+        rr:class wd:GrossDomesticProduct
     ].
 
 <GeoNamesTriples>
     # Define the data source (file location)
     rml:logicalSource [
-        rml:source "/home/alescop/Documents/University/BMKG/knowledge_graphs/data/countryInfo.csv";
+        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/countryInfo.csv";
         rml:referenceFormulation ql:CSV
     ];
 
@@ -56,7 +78,16 @@
         ]
     ];
 
-    # Generate a URI for the continent object
+    # Define the object of the area property as an integer
+    rr:predicateObjectMap [ 
+        rr:predicate db:Area;
+        rr:objectMap [ 
+            rml:reference "Area"; 
+            rr:datatype xsd:integer 
+        ]
+    ];
+
+    # Link country with continent
     rr:predicateObjectMap [ 
         rr:predicate db:Continent;
         rr:objectMap [
@@ -67,6 +98,15 @@
             ];
         ];
     ].
-        
-<GDPTriples>
-    
+
+    # # Link country with the gdp
+    # rr:predicateObjectMap [ 
+    #     rr:predicate db:GrossDomesticProduct;
+    #     rr:objectMap [
+    #         rr:parentTriplesMap <GDPTriples>;
+    #         rr:joinCondition [
+    #             rr:child "ISO3";
+    #             rr:parent "country/@key";
+    #         ];
+    #     ];
+    # ].

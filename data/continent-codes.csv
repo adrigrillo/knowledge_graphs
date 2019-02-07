@@ -1,8 +1,8 @@
-Code,Name
-AF,Africa
-NA,North_America
-OC,Oceania
-AN,Antarctica
-AS,Asia
-EU,Europe
-SA,South_America
+Code,Page,Name
+AF,Africa,Africa
+NA,North_America,North America
+OC,Oceania,Oceania
+AN,Antarctica,Antarctica
+AS,Asia,Asia
+EU,Europe,Europe
+SA,South_America,South America
