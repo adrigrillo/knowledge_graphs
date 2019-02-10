@@ -14,6 +14,8 @@
 @base <http://geonames.org/> .
 
 <ContinentCodesTriples>
+    a rr:TriplesMap;
+    
     # Define the data source
     rml:logicalSource [
         rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/continent-codes.csv";
@@ -34,21 +36,9 @@
         ]
     ].
 
-<GDPTriples>
-
-    rml:logicalSource [
-        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/gdp_worldbank_small.xml";
-        rml:referenceFormulation ql:XPath ;
-        rml:iterator "/Root/data/record"
-    ];
-
-    # Generate a URI for each GDP yearly entry for each country
-    rr:subjectMap [ 
-        rr:template "http://api.worldbank.org/v2/country/{country/@key}/indicator/NY.GDP.MKTP.CD?format=json&date={year}";
-        rr:class wd:GrossDomesticProduct
-    ].
-
 <GeoNamesTriples>
+    a rr:TriplesMap;
+
     # Define the data source (file location)
     rml:logicalSource [
         rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/countryInfo.csv";
@@ -66,6 +56,15 @@
         rr:predicate rdfs:label;
         rr:objectMap [ 
             rml:reference "Country"
+        ]
+    ];
+    
+    # Define the object of the population property as an integer
+    rr:predicateObjectMap [ 
+        rr:predicate db:Name;
+        rr:objectMap [ 
+            rml:reference "Country";
+            rr:language "en-us"
         ]
     ];
     
@@ -97,16 +96,79 @@
                 rr:parent "Code";
             ];
         ];
+    ];
+
+    # Link country with the gdp
+    rr:predicateObjectMap [ 
+        rr:predicate db:GrossDomesticProduct;
+        rr:objectMap [
+            rr:parentTriplesMap <GDPTriples>;
+            rr:joinCondition [
+                rr:child "ISO3";
+                rr:parent "country/@key";
+            ];
+        ];
+    ].
+
+
+<GDPTriples>
+    a rr:TriplesMap;
+    
+    rml:logicalSource [
+        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/gdp_worldbank_small.xml";
+        rml:referenceFormulation ql:XPath ;
+        rml:iterator "/Root/data/record"
+    ];
+
+    # Generate a URI for each GDP yearly entry for each country
+    rr:subjectMap [ 
+        rr:template "http://api.worldbank.org/v2/country/{country/@key}/indicator/NY.GDP.MKTP.CD?format=json&date={year}";
+        rr:class db:GrossDomesticProduct
+    ];
+
+    # Map the year name to rdfs:label
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label;
+        rr:objectMap [ 
+            rml:reference "year";
+            rr:datatype xsd:integer 
+        ]
+    ];
+
+    # Link to the country 
+    rr:predicateObjectMap [ 
+        rr:predicate db:Country ;
+        rr:objectMap [ 
+            rml:reference "country" 
+        ]
+    ];
+
+    # Link to the year 
+    rr:predicateObjectMap [ 
+        rr:predicate db:Year ;
+        rr:objectMap [ 
+            rml:reference "year";
+            rr:datatype xsd:integer  
+        ]
+    ];
+        
+    # Link to the value 
+    rr:predicateObjectMap [ 
+        rr:predicate db:GrossDomesticProduct ;
+        rr:objectMap [ 
+            rml:reference "value";
+            rr:datatype xsd:integer  
+        ]
     ].
 
     # # Link country with the gdp
     # rr:predicateObjectMap [ 
     #     rr:predicate db:GrossDomesticProduct;
     #     rr:objectMap [
-    #         rr:parentTriplesMap <GDPTriples>;
-    #         rr:joinCondition [
-    #             rr:child "ISO3";
-    #             rr:parent "country/@key";
-    #         ];
+    #         rr:parentTriplesMap <GeoNamesTriples>; 
+    #             rr:joinCondition [
+    #                 rr:child "country/@key";
+    #                 rr:parent "ISO3";
+    #             ]
     #     ];
-    # ].
+    # ]. 
