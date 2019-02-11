@@ -160,13 +160,13 @@
             rr:datatype xsd:integer  
         ]
     ];
-        
+
     # Link to the value 
     rr:predicateObjectMap [ 
-        rr:predicate db:GrossDomesticProduct ;
+        rr:predicate rdfs:range;
         rr:objectMap [ 
             rml:reference "value";
-            rr:datatype xsd:integer  
+            rr:datatype xsd:float  
         ]
     ].
 
