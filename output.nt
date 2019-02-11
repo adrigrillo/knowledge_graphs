@@ -1,17 +1,24 @@
 <http://dbpedia.org/page/Africa> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/Africa> <http://www.w3.org/2000/01/rdf-schema#label> "Africa".
+<http://dbpedia.org/page/Africa> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Africa"@en-us.
 <http://dbpedia.org/page/North_America> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/North_America> <http://www.w3.org/2000/01/rdf-schema#label> "North America".
+<http://dbpedia.org/page/North_America> <http://mappings.dbpedia.org/server/ontology/classes/Name> "North America"@en-us.
 <http://dbpedia.org/page/Oceania> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/Oceania> <http://www.w3.org/2000/01/rdf-schema#label> "Oceania".
+<http://dbpedia.org/page/Oceania> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Oceania"@en-us.
 <http://dbpedia.org/page/Antarctica> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/Antarctica> <http://www.w3.org/2000/01/rdf-schema#label> "Antarctica".
+<http://dbpedia.org/page/Antarctica> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Antarctica"@en-us.
 <http://dbpedia.org/page/Asia> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/Asia> <http://www.w3.org/2000/01/rdf-schema#label> "Asia".
+<http://dbpedia.org/page/Asia> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Asia"@en-us.
 <http://dbpedia.org/page/Europe> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/Europe> <http://www.w3.org/2000/01/rdf-schema#label> "Europe".
+<http://dbpedia.org/page/Europe> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Europe"@en-us.
 <http://dbpedia.org/page/South_America> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Continent>.
 <http://dbpedia.org/page/South_America> <http://www.w3.org/2000/01/rdf-schema#label> "South America".
+<http://dbpedia.org/page/South_America> <http://mappings.dbpedia.org/server/ontology/classes/Name> "South America"@en-us.
 <http://geonames.org/countries/AD/Andorra.html> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappings.dbpedia.org/server/ontology/classes/Country>.
 <http://geonames.org/countries/AD/Andorra.html> <http://www.w3.org/2000/01/rdf-schema#label> "Andorra".
 <http://geonames.org/countries/AD/Andorra.html> <http://mappings.dbpedia.org/server/ontology/classes/Name> "Andorra"@en-us.

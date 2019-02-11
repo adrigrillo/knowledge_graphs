@@ -34,6 +34,15 @@
         rr:objectMap [ 
             rml:reference "Name"
         ]
+    ];
+
+    # Show the country name
+    rr:predicateObjectMap [ 
+        rr:predicate db:Name;
+        rr:objectMap [ 
+            rml:reference "Name";
+            rr:language "en-us"
+        ]
     ].
 
 <GeoNamesTriples>
