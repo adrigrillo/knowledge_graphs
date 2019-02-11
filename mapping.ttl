@@ -120,8 +120,8 @@
     a rr:TriplesMap;
     
     rml:logicalSource [
-        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/gdp_worldbank_small.xml";
-        rml:referenceFormulation ql:XPath ;
+        rml:source "/home/adrigrillo/Documents/knowledge_graphs/assignment_1/data/gdp_worldbank.xml";
+        rml:referenceFormulation ql:XPath;
         rml:iterator "/Root/data/record"
     ];
 
@@ -144,7 +144,8 @@
     rr:predicateObjectMap [ 
         rr:predicate db:Country ;
         rr:objectMap [ 
-            rml:reference "country" 
+            rml:reference "country";
+            rr:language "en"
         ]
     ];
 
