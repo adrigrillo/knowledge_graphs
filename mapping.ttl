@@ -6,9 +6,6 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix db: <http://mappings.dbpedia.org/server/ontology/classes/> .
-@prefix dbo: <http://dbpedia.org/ontology/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix gn: <http://geonames.org/> .
 @prefix wd: <http://worldbank.org/> .
 @base <http://geonames.org/> .
@@ -41,7 +38,7 @@
         rr:predicate db:Name;
         rr:objectMap [ 
             rml:reference "Name";
-            rr:language "en-us"
+            rr:language "en"
         ]
     ].
 
@@ -73,7 +70,7 @@
         rr:predicate db:Name;
         rr:objectMap [ 
             rml:reference "Country";
-            rr:language "en-us"
+            rr:language "en"
         ]
     ];
     
@@ -118,7 +115,6 @@
             ];
         ];
     ].
-
 
 <GDPTriples>
     a rr:TriplesMap;
@@ -169,15 +165,3 @@
             rr:datatype xsd:float  
         ]
     ].
-
-    # # Link country with the gdp
-    # rr:predicateObjectMap [ 
-    #     rr:predicate db:GrossDomesticProduct;
-    #     rr:objectMap [
-    #         rr:parentTriplesMap <GeoNamesTriples>; 
-    #             rr:joinCondition [
-    #                 rr:child "country/@key";
-    #                 rr:parent "ISO3";
-    #             ]
-    #     ];
-    # ]. 
