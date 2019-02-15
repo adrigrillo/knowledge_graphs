@@ -1,0 +1,11 @@
+PREFIX db: <http://mappings.dbpedia.org/server/ontology/classes/>
+SELECT DISTINCT ?name ?population ?area
+WHERE { 
+    ?country a db:Country .
+    ?country db:Name ?name .
+    ?country db:Population ?population .
+    ?country db:Area ?area .
+    FILTER (?population < 50000)
+} 
+ORDER BY ?area
+LIMIT 100 

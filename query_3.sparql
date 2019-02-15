@@ -1,0 +1,17 @@
+PREFIX db: <http://mappings.dbpedia.org/server/ontology/classes/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?name ?value
+WHERE { 
+    ?country a db:Country .
+    ?country db:Name ?name .
+    ?country db:GrossDomesticProduct ?GDP1960 .
+    ?country db:GrossDomesticProduct ?GDP2017 .
+    ?GDP1960 db:Year 1960 .
+    ?GDP2017 db:Year 2017 .
+	?GDP1960 rdfs:value ?value1960 .
+    ?GDP2017 rdfs:value ?value2017 .
+    BIND(xsd:float(?value2017) - xsd:float(?value1960) AS ?value)
+} 
+ORDER BY DESC (?value)
+LIMIT 10
