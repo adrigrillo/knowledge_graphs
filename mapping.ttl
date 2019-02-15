@@ -135,8 +135,8 @@
     rr:predicateObjectMap [ 
         rr:predicate rdfs:label;
         rr:objectMap [ 
-            rml:reference "year";
-            rr:datatype xsd:integer 
+            rr:template "GDP of {year}";
+            rr:termType rr:Literal;
         ]
     ];
 
