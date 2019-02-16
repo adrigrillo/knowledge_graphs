@@ -1,0 +1,15 @@
+PREFIX db: <http://mappings.dbpedia.org/server/ontology/classes/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT{ 
+?country db:GrossDomesticProductPerCapita ?GDPperCapita 
+}
+ WHERE {
+?country a db:Country .    
+?country db:GrossDomesticProduct ?GDP.
+?country db:Population ?population .
+?GDP rdfs:value ?GDPvalue .
+?GDP db:Year 2017 .
+BIND(xsd:float(?GDPvalue)/xsd:float(?population) AS ?GDPperCapita) 
+}
