@@ -1,12 +1,13 @@
 PREFIX db: <http://mappings.dbpedia.org/server/ontology/classes/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-SELECT DISTINCT ?name ?value
-WHERE { 
+
+select distinct ?name ?value
+where { 
     ?country a db:Country .
     ?country db:Name ?name .
     ?country db:GrossDomesticProduct ?GDP .
     ?GDP rdfs:value ?value .
     ?GDP db:Year 2017 .
 } 
-ORDER BY DESC (?value)
-LIMIT 10
+order by desc (?value)
+limit 10

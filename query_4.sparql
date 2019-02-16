@@ -2,28 +2,24 @@ PREFIX db: <http://mappings.dbpedia.org/server/ontology/classes/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT DISTINCT 
-
-?continent
-(count(distinct ?country) as  ?count)
-
-WHERE { 
-    select * 
-    {
-    ?country a db:Country .
-    ?country db:Continent ?continent .
-    ?country db:Name ?name .
-    ?country db:GrossDomesticProduct ?GDP1960 .
-    ?country db:GrossDomesticProduct ?GDP2017 .
-    ?GDP1960 db:Year 1960 .
-    ?GDP2017 db:Year 2017 .
-    ?GDP1960 rdfs:value ?value1960 .
-    ?GDP2017 rdfs:value ?value2017 .
-        BIND(xsd:float(?value2017) - xsd:float(?value1960) AS ?value)
+select distinct ?continentName (count(distinct ?country) as  ?count)
+where {
+    select ?continentName ?country
+    where {
+        ?country a db:Country .
+        ?country db:Name ?name .
+        ?country db:Continent ?continent .
+        ?continent db:Name ?continentName .
+        ?country db:GrossDomesticProduct ?GDP1960 .
+        ?country db:GrossDomesticProduct ?GDP2017 .
+        ?GDP1960 db:Year 1960 .
+        ?GDP2017 db:Year 2017 .
+        ?GDP1960 rdfs:value ?value1960 .
+        ?GDP2017 rdfs:value ?value2017 .
+        bind(xsd:float(?value2017) - xsd:float(?value1960) as ?value)
     }
-    ORDER BY DESC (?value)  
-    LIMIT 20
+    order by desc (?value)
+    limit 20
 }
-GROUP BY ?continent
-ORDER BY DESC (?count) 
-
+group by ?continentName
+order by desc (?count)
