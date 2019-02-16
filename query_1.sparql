@@ -9,4 +9,3 @@ where {
     filter (?population < 50000)
 } 
 order by ?area
-limit 100 
