@@ -1,0 +1,21 @@
+@prefix schema: <http://schema.org/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix :      <http://foo.com/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Amazing  a            dbo:Organisation ;
+        dbo:foundedBy  :Amrapali ;
+        dbo:location   :India .
+
+:Amrapali  a            schema:Person ;
+        dbo:birthDate   "1980-03-10"^^xsd:int ;
+        dbo:birthPlace  :Delhi .
+
+:Delhi  rdfs:label   "Delhi" ;
+        dbo:isCityOf  :Delhi .
+
+:India  rdfs:label           "India" ;
+        dbo:capital          :Delhi ;
+        dbo:populationTotal  "10000"^^xsd:date .
