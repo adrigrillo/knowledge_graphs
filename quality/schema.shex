@@ -1,0 +1,29 @@
+PREFIX schema: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX : <http://foo.com/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+:Country IRI {
+    rdfs:label          xsd:string ;
+    dbo:Capital         @:City ;
+    dbo:populationTotal xsd:int
+}
+
+:City IRI {
+    rdfs:label      xsd:string ;
+    schema:isCityOf @:Country
+}
+
+:Person IRI {
+    a [ schema:Person ] ;
+    dbo:birthDate   xsd:date ;
+    dbo:birthPlace  @:City
+}
+
+:Organisation IRI {
+    a [ dbo:Organisation ] ;
+    dbo:location    @:City ;
+    dbo:foundedBy   @:Person
+}

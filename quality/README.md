@@ -3,7 +3,7 @@
 ### Assessing the quality of a knowledge graph
 A knowledge graph `graph.turtle` is given in the [Terse RDF Triple Language](https://www.w3.org/TR/turtle/) and is used
 to assess its quality. To do so, the graph has to follow a given set of constrains that are established in the file
-`schema.ShExC` that follow the specification of the [Shape Expressions Language](http://shex.io/shex-semantics/).
+`schema.ShExC` that follow the specification of the [Shape Expressions Language](http://shex.io/shex-primer/).
 
 The main objective of the constrains is to check if the graph follows the correct and expected data types and values and
 that the formulation uses the best practices. Two different kind of constrains will be reviewed: RDF conformance
