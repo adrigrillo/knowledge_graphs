@@ -13,7 +13,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 :City IRI {
     rdfs:label      xsd:string ;
-    schema:isCityOf @:Country
+    dbo:isCityOf @:Country
 }
 
 :Person IRI {
