@@ -7,7 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 :Country IRI {
     rdfs:label          xsd:string ;
-    dbo:Capital         @:City ;
+    dbo:capital         @:City ;
     dbo:populationTotal xsd:int
 }
 
