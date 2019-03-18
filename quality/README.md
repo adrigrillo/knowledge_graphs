@@ -1,5 +1,5 @@
 # Building and mining Knowledge Graphs
-## Assignment 1
+## Assignment 2
 ### Assessing the quality of a knowledge graph
 A knowledge graph `graph.turtle` is given in the [Terse RDF Triple Language](https://www.w3.org/TR/turtle/) and is used
 to assess its quality. To do so, the graph has to follow a given set of constrains that are established in the file
