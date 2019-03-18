@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,left=2cm,right=2cm,top=3cm,bottom=3cm]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,wrapfig,graphicx}
+\usepackage{todonotes}
+\usepackage{eurosym}
+\usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[parfill]{parskip}
+\renewcommand{\baselinestretch}{1.2}
+\title{Assignment 2:\\ Knowledge graph quality assessment and FAIR\\ PART A: Knowledge Graph Quality Assessment}
+\author{Martyna Mikos - i6155316\\
+Adrian Rodriguez Grillo - i6193748\\
+Christian Heil - i6097391\\\\ Building and Mining Knowledge Graphs}
+
+\begin{document}
+\maketitle
+\section{Task and methodology}
+The goal of this part of the assignment is to assess the quality of a given knowledge graph by checking the entities contained in it against a validation file and comment the results and possible solutions to improve the graph. 
+To validate the content of the graph the \href{http://shex.io/}{Shape Expressions (ShEx) language} is going to be used to verify that the knowledge graph follows the constraints stated in the statement of the practice.
+
+Two main types of constraints must be fulfilled by the knowledge graph: the RDF conformance constraints, that establish the kind of entities that can exist in the graph, and the properties and data type constraints, which define the properties of the entities and their data type.
+Following the description, four different kinds of nodes will exist in the graph, in concrete: country, city, person, and organisation. 
+
+Although all the entities are referenced using an URI, they can be classified into two groups. 
+The first group, where country and city are included, the node will be only labelled by a string, using the attribute \texttt{rdfs:label}, whereas, the second group, formed by person and organization, will have to explicitly indicate the class that they belong. In this case, the person entities will be of the class \texttt{schema:Person} and the organisation ones of the class \texttt{dbo:Organisation}. 
+Code fragments \ref{lst:group1} and \ref{lst:group2} contain generic templates of how the conformance constrains are generated for the two groups.
+
+\noindent\begin{minipage}{.45\textwidth}
+\centering
+\begin{lstlisting}[caption=group 1 constrains,frame=single,label={lst:group1}]
+:EntityName IRI {
+    rdfs:label      xsd:string
+}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[caption=group 2 constrains,frame=single,label={lst:group2}]
+:EntityName IRI {
+    a      [ prefix:class ]
+}
+\end{lstlisting}
+\end{minipage}
+
+Regarding the rest of the attributes and their data types, two kinds can be again differentiated depending on the data type. On the one hand, there are attributes with simple data types, defined by the XML schema definition, like the labels of country and city or the total population of the countries. On the other hand, more complex attributes can be found, like the capital city attribute of the countries or the birthplace in person. These complex attributes refer to another entity of the graph, making a relation between the two affected nodes.
+
+For the simple data types, a template of how a constraint should look can be found in the code fragment \ref{lst:simple_data}.
+Apart from the \texttt{rdfs:label} of \textit{country} and \textit{city}, that uses \texttt{xsd:string}, the birth date of \textit{person}, that is \texttt{xsd:date} and the total population of \textit{country} are attributes of the entities that use simple data types.
+
+With respect to the total population attribute, the data type used is \texttt{xsd:int} that correspond with 32-bit signed integers. 
+This data type was chosen to make the graph pass the validation, however, this data type set some restrictions that can be avoided using \texttt{xsd:integer}.
+
+Regarding the complex attributes, that refer to other instances of the graph, a template of how a constraint should look can be found in the code fragment \ref{lst:complex_data}. To create this kind of constraint in the validation file the symbol `\texttt{@:}' is used followed by the class of instance the attribute is linking. The capital of \textit{country}, that links to a \textit{city}, the attribute is city of from \textit{city}, that refers to a \textit{country}, the birthplace of \textit{person}, that uses a city instance, and location and the attribute founded by of the organisation entities, that links to a \textit{city} and a \textit{person} respectively, are complex attributes of the validation file.
+
+\noindent\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[caption=simple data type constrain,frame=single,label={lst:simple_data}]
+prefix:attributeName xsd:dataType
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[caption=complex data type constrain,frame=single,label={lst:complex_data}]
+prefix:attributeName @:entityName
+\end{lstlisting}
+\end{minipage}
+
+As no more information about the constrains was provided, there is no restriction about the cardinality of the attributes, meaning that the default one is used for all the attributes, this is that there must exist one value for each, $\{1, 1\}$. Although this seems correct for most of the attributes, this could be a limiting factor in the organisation entity, where is possible to find more that one founder or to be present in more that one place. This can be improved establishing that there must be at least one element for the attribute, but it can have more. To do so, the operator `\texttt{+}' could be used, as it can be seen in the code fragment (?).
+
+\newpage
+\begin{lstlisting}[caption=organisation with cardinal improvement,frame=single,label={lst:cardinality},xleftmargin=.2\textwidth,xrightmargin=.2\textwidth]
+:Organisation IRI {
+    a               [ dbo:Organisation ] ;
+    dbo:location    @:City    + ;
+    dbo:foundedBy   @:Person  +
+}
+\end{lstlisting}
+
+\section{Results of the quality assessment using ShEx}
+The quality assessment showed that none of the nodes passed the validation. Constraints applied to the knowledge graph revealed that all of the nodes are defined incorrectly. All the issues that arose due to the testing are presented in Table \ref{tab:table1}.
+
+
+
+\section{Analysis of the results}
+
+The table below shows the issues that occurred during the quality check. The last column presents how each issue can be fixed.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|X|}
+            \hline
+\textbf{Node}  & \textbf{Shape} & \textbf{Quality issue}& \textbf{Fixing possibility} \\
+        \hline        \hline
+    India & Country & Country has the population property listed in an inappropriate format & Population data format should be changed from \textit{date} to \textit{int}. \\
+    \hline
+    Delhi &  City & The value \textit{isCityOf} should refer to the Country but in RDF data it refers to the city instead. & Change the value of \textit{isCityOf} from \textit{Delhi} to \textit{India}.\\
+        \hline
+    Amrapali & Person & The value of \textit{birthDate} is listed in an inappropriate format. & Data format for \textit{birthDate} should be changed from \textit{int} to \textit{date}. \\
+            \hline
+    Amazing & Organisation & Location of an organisation should be a city but is a country instead & Change the value of \textit{location} from \textit{India} to the corresponding city. \\
+        \hline
+    \end{tabularx}
+    \caption{Quality issues}
+    \label{tab:table1}
+\end{table}
+\end{document}

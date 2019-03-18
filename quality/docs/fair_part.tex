@@ -1,0 +1,42 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,wrapfig,graphicx}
+\usepackage{todonotes}
+\usepackage{eurosym}
+\usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[parfill]{parskip}
+\renewcommand{\baselinestretch}{1.2}
+\title{Assignment 2:\\ Knowledge graph quality assessment and FAIR\\
+PART B: Knowledge Graph FAIRness}
+\author{Martyna Mikos - i6155316\\
+Adrian Rodriguez Grillo - i6193748\\
+Christian Heil - i6097391\\\\ Building and Mining Knowledge Graphs}
+
+\begin{document}
+\maketitle
+\section{FAIR principles}
+% In your own words, define what the FAIR principles are and what they aim to achieve.
+% Use examples to illustrate your answer. Your answer should be a written discussion
+% between 200 and 300 words.
+The FAIRness principles and sub-principles comprise a number of ground rules for the handling of digital information in order to improve discovery and reusability for others. Unlike other initiatives of this kind and with the future in mind, FAIR puts emphasis on ensuring that the data is not only human but also machine readable. The acronym FAIR highlights the four main principles: findable, accessible, interoperable and reusable. Findable refers to the usage of unique global identifiers and extensive documentation of the data, making it easier to locate and understand a dataset. As a result of poor metadata, unclarities regarding a discovered but poorly documented dataset can arise. For example, attributes that are difficult or impossible to interpret without further explanation. Accessible concerns the retrievability of the data and metadata using the respective identifiers. This includes the retrieval of metadata, even when the original data cannot be accessed anymore. Interoperable refers to the use of shared vocabularies and the incorporation of necessary references. A common vocabulary is crucial to present data in a machine-readable manner. Reusable involves providing high-quality metadata, licensing, and origins of the data. This way, anyone wanting to incorporate the data in his research has a transparent view on what she is working with. In short, the FAIRness principles aim to ensure that data is preserved in the most useful and effective manner for future usage by others and yourself.
+
+%specific examples?
+
+\newpage
+\section{Important factors in finding and reusing knowledge graphs}
+% 2. In your opinion, what are the important factors in finding and reusing knowledge graphs,
+% and how do these align with the FAIR principles, if at all? Your answer should be a
+% written discussion between 200 and 300 words.
+One of the driving costs in research is associated with data collection. By following the FAIR principles all parties involved can ensure that the value added by the properly stored digital information is maximized. In Knowledge Graphs a number of important factors aligning with the FAIR principles contribute to successfully finding and reusing them. They are easiest to find if they are stored in publicly available resources such as repositories for datasets. Moreover, context and provenance should be described in detail and in a machine-readable way to ensure that the knowledge graph is sufficiently transparent, understandable and reusable. Another factor concerning the metadata is that the dictionaries and formats used should meet existing standards, preferably without deviating from them. Knowledge graphs that are the easiest to use are the ones with a provided SPARQL endpoint. At the moment this is not a part of the FAIRness principles but has a significant impact on the extent to which an existing knowledge graph gets reused. While SPARQL endpoints are documented on the wiki of the W3C community, the last modification of the list goes back to the 29th of November 2017, which is quite long given that knowledge graphs have witnessed such a steep increase in popularity over the recent years.
+
+
+
+
+
+\end{document}
